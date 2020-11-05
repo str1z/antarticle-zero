@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const root = "http://127.0.0.1:8080/";
+      function post(url = "", data = {}) {
+        return fetch(root + url, {
+          method: "POST", // *GET, POST, PUT, DELETE, etc.
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .catch((e) => e)
+          .then((r) => r.json());
+      }
+      (async () => {
+        let res;
+        res = await post("user/verify", {
+          user: "root",
+          pass: "123456",
+        });
+        let { token } = res;
+        console.log(token);
+
+        try {
+          post("article/create", {
+            token,
+          }).catch((e) => console.log(e));
+        } catch (e) {
+          console.log("something went wrong");
+        }
+      })();
+    </script>
+  </body>
+</html>
