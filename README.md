@@ -6,4 +6,4 @@ Made with Node.js (express, json-schema) and MongoDB
 
 Supports only basic authentication right now.
 
-Endpoints documentation not written yet.
+Endpoint documentations not written yet.
